@@ -20,3 +20,13 @@ def home(request):
 def game(request):
     if request.method=="GET":
         return render(request,'game.html')
+    elif request.method =="POST":
+        user_nums = []
+        cows = 0
+        bulls = 0
+        for i in range(1,5):
+            if int(request.POST.get(f'number{i}')) in user_nums:
+                return render(request, 'game.html', {'error': "numbers must be different"})
+            else:
+                user_nums.append(int(request.POST.get(f'number{i}')))
+        print(user_nums)
