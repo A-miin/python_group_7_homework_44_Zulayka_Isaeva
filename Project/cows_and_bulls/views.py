@@ -29,4 +29,10 @@ def game(request):
                 return render(request, 'game.html', {'error': "numbers must be different"})
             else:
                 user_nums.append(int(request.POST.get(f'number{i}')))
+                if user_nums[-1] in numbers:
+                    if user_nums[-1]==numbers[i-1]:
+                        bulls += 1
+                    else:
+                        cows += 1
+        print(f'bulls={bulls}, cows={cows}')
         print(user_nums)
