@@ -26,16 +26,22 @@ def game(request):
         user_nums = []
         cows = 0
         bulls = 0
-        for i in range(1,5):
-            if int(request.POST.get(f'number{i}')) in user_nums:
-                return render(request, 'game.html', {'error': "numbers must be different"})
-            else:
-                user_nums.append(int(request.POST.get(f'number{i}')))
-                if user_nums[-1] in numbers:
-                    if user_nums[-1]==numbers[i-1]:
-                        bulls += 1
-                    else:
-                        cows += 1
+        try:
+            for i in range(1,5):
+                number = int(request.POST.get(f'number{i}'))
+                if number in user_nums:
+                    return render(request, 'game.html', {'error': "numbers must be different!"})
+                elif number>10 or number<1:
+                    return render(request, 'game.html', {'error': "numbers must be between 1 and 10!"})
+                else:
+                    user_nums.append(number)
+                    if user_nums[-1] in numbers:
+                        if user_nums[-1]==numbers[i-1]:
+                            bulls += 1
+                        else:
+                            cows += 1
+        except:
+            return render(request, 'game.html', {'error': "Enter correct numbers!"})
         if bulls!=4:
             return render(request, 'game.html', {'continue':True, 'bulls':bulls, 'cows':cows})
         else:
