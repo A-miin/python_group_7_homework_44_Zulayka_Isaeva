@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
 def home(request):
     return render(request, 'home.html')
 
 def game(request):
-    return render(request,'game.html')
+    if request.method=="GET":
+        return render(request,'game.html')
