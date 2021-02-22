@@ -9,9 +9,18 @@
 <body>
     <div class="container d-flex align-items-center flex-column">
         <h1 class="mt-4 p-2">This is my 44th homework</h1>
-        <form action="game/">
+        {% if win %}
+            Congratulations! You win!
+            <form action="/game/">
+            <input class="mt-3 p-2 btn btn-info" type="submit" value="Play again" />
+            </form>
+
+        {% else %}
+            <form action="game/">
             <input class="mt-3 p-2 btn btn-info" type="submit" value="Go to game form" />
-        </form>
+            </form>
+        {% endif %}
+
     </div>
 
     <script src="{% static "js/bootstrap.min.js" %}"></script>

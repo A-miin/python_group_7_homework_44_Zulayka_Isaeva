@@ -15,9 +15,11 @@ def set_numbers():
 def home(request):
     set_numbers()
     print(numbers)
-    return render(request, 'home.html')
+    return render(request, 'home.html',{'win':False})
 
 def game(request):
+    global win
+    win = False
     if request.method=="GET":
         return render(request,'game.html')
     elif request.method =="POST":
@@ -34,5 +36,9 @@ def game(request):
                         bulls += 1
                     else:
                         cows += 1
-        print(f'bulls={bulls}, cows={cows}')
-        print(user_nums)
+        if bulls!=4:
+            return render(request, 'game.html', {'continue':True, 'bulls':bulls, 'cows':cows})
+        else:
+            set_numbers()
+            print(numbers)
+            return  render(request, 'home.html', {'win':True})

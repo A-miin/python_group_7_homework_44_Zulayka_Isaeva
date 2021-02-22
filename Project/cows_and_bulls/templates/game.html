@@ -14,6 +14,10 @@
             {% if error %}
                 <h1 class="text-danger"> {{ error }}</h1>
             {% endif %}
+            {% if continue %}
+                <h3>Bulls: {{ bulls }}</h3>
+                <h3>Cows: {{ cows }}</h3>
+            {% endif %}
             {% csrf_token %}
           <p>Guess 4 numbers. Enter them separated with spaces  (between 1 and 10):</p>
                 <input type="number" name="number1" min="1" max="10">
